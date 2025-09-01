@@ -1,0 +1,21 @@
+<div class="table-wrapper">
+  <table class="transposed-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">
+          {{ item.companyName }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Price</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.currentPrice }}</td></tr>
+      <tr><td>Close</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.previousClose }}</td></tr>
+      <tr><td>Open</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.openPrice }}</td></tr>
+      <tr><td>Low</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.dayLow }}</td></tr>
+      <tr><td>High</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.dayHigh }}</td></tr>
+      <tr><td>Cap (Cr)</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.marketCapCr }}</td></tr>
+      <tr><td>P/E</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.peRatio }}</td></tr>
+    </tbody>
+  </table>
+</div>
