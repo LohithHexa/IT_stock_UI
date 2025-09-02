@@ -1,9 +1,10 @@
 .table-wrapper {
   overflow-x: auto;
   margin: 8px;
-  border-radius: 4px;
   background-color: #fefefe;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: none;
+  border: 1px solid #000; /* Thin, sharp outer border */
+  border-radius: 0; /* Remove curve, make edges sharp */
 }
 
 .transposed-table {
@@ -13,11 +14,12 @@
   font-size: 12px;
   background-color: #fcfcfc;
   text-align: center;
+  border: 0.5px solid #000; /* Thin, sharp table border */
 }
 
 th, td {
   padding: 4px 6px;
-  border: 1px solid #ddd;
+  border: 1px solid #000; /* Thin, sharp cell borders */
   white-space: nowrap;
   vertical-align: middle;
   font-weight: normal;
@@ -43,18 +45,23 @@ tbody td:first-child {
   text-align: center;
 }
 
+/* Sticky metric column — no visual changes */
+thead th:first-child,
+tbody td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
 /* Hover effect */
 tbody tr:hover td {
   background-color: #e0e0e0;
 }
 
-/* Company column colors */
-.company-0 { background-color: #e3f2fd; }
-.company-1 { background-color: #e0f7fa; }
-.company-2 { background-color: #f3e5f5; }
-.company-3 { background-color: #e8f5e9; }
-.company-4 { background-color: #fff3e0; }
+/* Company column colors — lighter pastel tones */
 
+
+/* Responsive tweaks */
 @media (max-width: 768px) {
   .transposed-table {
     font-size: 11px;

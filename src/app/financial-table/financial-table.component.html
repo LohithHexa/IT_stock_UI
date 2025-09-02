@@ -1,21 +1,112 @@
+<div style="text-align: center; margin-bottom: 10px;">
+  <h3 style="margin: 0;">Indian IT Companies Stock Price Information – NSE</h3>
+</div>
+
+<!-- Company Selector as Checkboxes -->
+<div style="margin-bottom: 12px; text-align: center;">
+  <label style="font-weight: 600;">Select Companies:</label>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px;">
+    <div *ngFor="let item of financials" style="display: flex; align-items: center;">
+      <input
+        type="checkbox"
+        [value]="item.companyName"
+        (change)="onCheckboxChange($event, item.companyName)"
+        [checked]="selectedCompanies.includes(item.companyName)"
+        [id]="item.companyName"
+      />
+      <label [for]="item.companyName" style="margin-left: 4px;">
+        {{ item.companyName }}
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- Scrollable Table with Sticky Metric Column -->
 <div class="table-wrapper">
   <table class="transposed-table">
     <thead>
       <tr>
-        <th>Metric</th>
-        <th *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">
-          {{ item.companyName }}
-        </th>
+        <th class="sticky-metric">Metric</th>
+        <ng-container *ngFor="let item of financials; let i = index">
+          <ng-container *ngIf="selectedCompanies.includes(item.companyName)">
+            <th [ngClass]="'company-' + i" style="text-align: center;">
+              {{ item.companyName }}
+            </th>
+          </ng-container>
+        </ng-container>
       </tr>
     </thead>
     <tbody>
-      <tr><td>Price</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.currentPrice }}</td></tr>
-      <tr><td>Close</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.previousClose }}</td></tr>
-      <tr><td>Open</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.openPrice }}</td></tr>
-      <tr><td>Low</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.dayLow }}</td></tr>
-      <tr><td>High</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.dayHigh }}</td></tr>
-      <tr><td>Cap (Cr)</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.marketCapCr }}</td></tr>
-      <tr><td>P/E</td><td *ngFor="let item of financials; let i = index" [ngClass]="'company-' + i">{{ item.peRatio }}</td></tr>
+      <tr>
+        <td class="sticky-metric">Price</td>
+        <ng-container *ngFor="let item of financials; let i = index">
+          <ng-container *ngIf="selectedCompanies.includes(item.companyName)">
+            <td [ngClass]="'company-' + i" style="text-align: right;">
+              ₹{{ item.currentPrice | number:'1.2-2' }}
+            </td>
+          </ng-container>
+        </ng-container>
+      </tr>
+      <tr>
+        <td class="sticky-metric">Close</td>
+        <ng-container *ngFor="let item of financials; let i = index">
+          <ng-container *ngIf="selectedCompanies.includes(item.companyName)">
+            <td [ngClass]="'company-' + i" style="text-align: right;">
+              ₹{{ item.previousClose | number:'1.2-2' }}
+            </td>
+          </ng-container>
+        </ng-container>
+      </tr>
+      <tr>
+        <td class="sticky-metric">Open</td>
+        <ng-container *ngFor="let item of financials; let i = index">
+          <ng-container *ngIf="selectedCompanies.includes(item.companyName)">
+            <td [ngClass]="'company-' + i" style="text-align: right;">
+              ₹{{ item.openPrice | number:'1.2-2' }}
+            </td>
+          </ng-container>
+        </ng-container>
+      </tr>
+      <tr>
+        <td class="sticky-metric">Low</td>
+        <ng-container *ngFor="let item of financials; let i = index">
+          <ng-container *ngIf="selectedCompanies.includes(item.companyName)">
+            <td [ngClass]="'company-' + i" style="text-align: right;">
+              ₹{{ item.dayLow | number:'1.2-2' }}
+            </td>
+          </ng-container>
+        </ng-container>
+      </tr>
+      <tr>
+        <td class="sticky-metric">High</td>
+        <ng-container *ngFor="let item of financials; let i = index">
+          <ng-container *ngIf="selectedCompanies.includes(item.companyName)">
+            <td [ngClass]="'company-' + i" style="text-align: right;">
+              ₹{{ item.dayHigh | number:'1.2-2' }}
+            </td>
+          </ng-container>
+        </ng-container>
+      </tr>
+      <tr>
+        <td class="sticky-metric">Cap</td>
+        <ng-container *ngFor="let item of financials; let i = index">
+          <ng-container *ngIf="selectedCompanies.includes(item.companyName)">
+            <td [ngClass]="'company-' + i" style="text-align: right;">
+              ₹{{ item.marketCapCr | number:'1.2-2' }} Cr
+            </td>
+          </ng-container>
+        </ng-container>
+      </tr>
+      <tr>
+        <td class="sticky-metric">P/E</td>
+        <ng-container *ngFor="let item of financials; let i = index">
+          <ng-container *ngIf="selectedCompanies.includes(item.companyName)">
+            <td [ngClass]="'company-' + i" style="text-align: right;">
+              {{ item.peRatio | number:'1.2-2' }}
+            </td>
+          </ng-container>
+        </ng-container>
+      </tr>
     </tbody>
   </table>
 </div>
